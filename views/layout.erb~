@@ -9,8 +9,8 @@
     <body>  
       <header>  
         <hgroup>  
-          <h1><a href="/">Recall</a></h1>  
-          <h2>'cause you're too busy to remember</h2>  
+          <h1><a href="/">Weather Music</a></h1>  
+          <h2>Sonifying the Weather with Super Collider</h2>  
         </hgroup>  
       </header>  
       
@@ -19,7 +19,7 @@
       </div>  
       
       <footer>  
-        <p><small>An app for <a href="http://net.tutsplus.com">Nettuts+</a>.</small></p>  
+        <p><small>An app by <a href="www.johndunlapmusic.com">John Dunlap</a>.</small> download sample here <a href="https://dl.dropboxusercontent.com/u/28820539/moderaterain.aiff"></a> </p>  
       </footer>  
     </body>  
     </html>  

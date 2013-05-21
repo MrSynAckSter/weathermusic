@@ -132,10 +132,11 @@ The Second Date
 		<option value="2005">2012</option> 
 		<option value="2005">2013</option> 
      		<option value="2005">2014</option> 
-   <section id="add" name="content"> 
+   
    </select>
 	<input type="submit"  value="submit" > 
    </form> 
+   <section id="add" name="content"> 
    
    <textarea><%= @wetout %></textarea> 
    </section>  

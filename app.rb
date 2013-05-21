@@ -15,24 +15,51 @@ post '/' do
 	year = params[:post][:year]
 	month = params[:post][:month] 
 	day = params[:post][:day] 
+        location = params[:post][:location] 
 	@wetout = "#{year} year! #{month} is the month! #{day} is the day!"  
-        Weatherparse.forecast(year,month,day)
+        Weatherparse.forecast(year,month,day,location)
         @pressure = Weatherparse.pressure
         @wetout = "#{@wetout} and here's some weather #{@pressure} is the pressure \n //BEGIN CODE"  
 	erb :weather
 end
 
 class Weatherparse
-   @@testman = "ham"
-   def self.forecast(year,month,day)  
+   def self.forecast(year = 2013,month = 1,day = 2,location)  
       Forecast::IO.configure do |configuration|
         configuration.api_key = '284bc96ec58d70d124724420603ff493'
       end 
       def self.pressure 
       @@pressure 
       end 
-      forecast = Forecast::IO.forecast(29.9728,-90.0590, time: Time.new(2005,8,29).to_i)
-      forecast.time = Time.new(year = 2013,month = 1,day = 2).to_i 
+      puts location
+      if location == "New York" 
+      longitude = 40.7142
+      latitude = -74.0064
+      puts longitude 
+      puts latitude 
+      end
+      if location == "New Orleans" 
+      longitude = 29.9728
+      latitude = -90.0590
+      puts longitude 
+      puts latitude
+      end 
+      if location == "Portland" 
+      longitude = 45.5236
+      latitude = -122.6750
+      puts longitude 
+      puts latitude 
+      end 
+      if location == "San Francisco" 
+      longitude = 37.7750 
+      latitude = - 122.4183
+      puts longitude
+      puts latitude 
+      end 
+      forecast = Forecast::IO.forecast(longitude,latitude, time: Time.new(year,month = 8 ,day = 1).to_i)
+      forecast.time = Time.new(year = 2013,month = 1,day = 2).to_i
+      #if location == "New York" 
+     # forecast.longitude =  
       @@pressure = forecast.currently.pressure  
       puts "#{@@pressure} is the pressure" 
       @@precipItensity = forecast.currently.precipIntensity 
@@ -56,11 +83,6 @@ class Weatherparse
       @@ozone = forecast.currently.ozone 
       puts "#{@@ozone} is the ozone" 
       @wetout = "#{@wetout} and it was worth a try"  
-   end    
-#add second method for second location 
-   def self.dewpoint 
-    @@weatheroutput  = "SincOsc #{@@testman} test #{@pressure}"    
-      puts @@weatheroutput  
+   end     
 
-   end 
 end   

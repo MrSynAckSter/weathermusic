@@ -139,4 +139,23 @@ The Second Date
    <section id="add" name="content"> 
    
    <textarea><%= @wetout %></textarea> 
-   </section>  
+
+</section>  
+
+<script> 
+
+//BEGIN ZE JAVASCRIPTEN 
+
+var context = new webkitAudioContext(), 
+	oscillator = context.createOscillator(); 
+
+	oscillator.connect(context.destination); 
+	oscillator.start(0); 
+
+	oscillator.type = 1; 
+
+	oscillator.frequency.value = 900;
+
+</script> 
+
+THIS IS THE NEW VERSION WITH THE JAVACRIPTEN

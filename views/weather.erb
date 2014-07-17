@@ -144,17 +144,53 @@ The Second Date
 
 <script> 
 
-//BEGIN ZE JAVASCRIPTEN 
+// Weather Primitives 
 
-var context = new webkitAudioContext(), 
-	oscillator = context.createOscillator(); 
+// Rain 
 
-	oscillator.connect(context.destination); 
-	oscillator.start(0); 
+// Rain Drops on Ground 
+//Wind 
 
-	oscillator.type = 1; 
+//Sun 
 
-	oscillator.frequency.value = 900;
+//Pollen 
+
+//High Storm 
+
+//Flood 
+
+var context = new webkitAudioContext(); 
+// Basic White noise 
+
+
+// Move this under audio context. Give it the correct audio context 
+
+var bufferSize = 4096; 
+var whiteNoise = context.createScriptProcessor(bufferSize, 1, 1); 
+whiteNoise.onaudioprocess = function(e) { 
+	var output = e.outputBuffer.getChannelData(0); 
+	for (var i = 0; i < bufferSize; i++){ 
+		output[i] = Math.random() * 2 -1; 
+	} 
+}
+
+whiteNoise.connect(context.destination); 
+
+whiteNoise.start(0); 
+//Final Mixer 
+
+//	var oscillator = context.createOscillator(); 
+
+//	 oscillator.connect(context.destination); 
+
+
+//	oscillator.start(0); 
+
+//	oscillator.type = 1; 
+
+//	oscillator.frequency.value = 900;
+
+
 
 </script> 
 

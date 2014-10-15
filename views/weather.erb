@@ -158,10 +158,10 @@ The Second Date
 //High Storm 
 
 //Flood 
+// Add Freaking JQUERY MY MANG 
 
 var context = new webkitAudioContext(); 
 // Basic White noise 
-
 
 // Move this under audio context. Give it the correct audio context 
 
@@ -170,28 +170,62 @@ var whiteNoise = context.createScriptProcessor(bufferSize, 1, 1);
 whiteNoise.onaudioprocess = function(e) { 
 	var output = e.outputBuffer.getChannelData(0); 
 	for (var i = 0; i < bufferSize; i++){ 
-		output[i] = Math.random() * 2 -1; 
+		output[i] = (Math.random() * 2 -1) + (Math.random() * 2 -1) + (Math.random() * 2 -1);  
 	} 
 }
 
 whiteNoise.connect(context.destination); 
 
-whiteNoise.start(0); 
+whiteNoise.start(0.5); 
+
+// Gain Node 
+
+// Reverb Node 
+
+//Env Node 
+var envGen = (function(context) { 
+	function envGen() {
+	this.attackTime = 0.5; 
+	this.releaseTime = Math.random() * 5; 
+	
+	var that = this; 
+	$(document).bind('gateOn', function (_) {
+		that.trigger(); 
+	}); 
+	$(document).bind('setAttack', function (_, value) {
+		that.attackTime = value; 
+	}); 
+	$(document).bind('setRelease', function (_, value) {
+		that.releaseTime = value; 
+	}); 
+};
+
+envGen.prototype.trigger = function() {
+	now = context.currentTime;
+	this.param.cancelScheduledvalues(now); 
+	this.param.setValueAtTime(0, now); 
+	this.param.linearRampToValueAtTime(1, now + this.attackTime); 
+	this.param.linearRampToValueAtTime(0, now + this.attackTime + this.releaseTime); 
+}; 
+
+envGen.prototype.connect = function(param) {
+	this.param = param; 
+}; 
+return evnGen; 
+})(context); 
+	
+var VCA = (function(context) { 
+	function VCA() { 
+		this.gain = context.createGain(); 
+		this.gain.gain.value = 0; 
+		this.input = this.gain; 
+		this.output = this.gain; 
+		this.amplitude = this.gain.gain; 
+	}; 
+}
+
 //Final Mixer 
-
-//	var oscillator = context.createOscillator(); 
-
-//	 oscillator.connect(context.destination); 
-
-
-//	oscillator.start(0); 
-
-//	oscillator.type = 1; 
-
-//	oscillator.frequency.value = 900;
-
 
 
 </script> 
 
-THIS IS THE NEW VERSION WITH THE JAVACRIPTEN

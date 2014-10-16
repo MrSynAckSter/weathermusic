@@ -1,3 +1,5 @@
+<script src="//code.jquery.com/jquery-2.1.0.min.js"></script> 
+
 Enter the dates that you would like to Sonify. Super Collider code will be generated below. 
   <link href="/style.css" rel="stylesheet">  
   <form action="/" method="post"> 
@@ -180,7 +182,8 @@ whiteNoise.start(0.5);
 
 // Gain Node 
 
-// Reverb Node 
+// Reverb Node
+ 
 
 //Env Node 
 var envGen = (function(context) { 
@@ -213,6 +216,7 @@ envGen.prototype.connect = function(param) {
 }; 
 return evnGen; 
 })(context); 
+
 	
 var VCA = (function(context) { 
 	function VCA() { 
@@ -222,7 +226,18 @@ var VCA = (function(context) {
 		this.output = this.gain; 
 		this.amplitude = this.gain.gain; 
 	}; 
-}
+
+
+	VCA.prototype.connect = function(node) {
+		if (node.hasOwnProperty('input')){
+	  	 this.output.connect(node.input); 
+      	  	}else {
+         	this.output.connect(node.input); 
+        	}; 
+	}
+
+	return VCA;
+})(context); 
 
 //Final Mixer 
 
